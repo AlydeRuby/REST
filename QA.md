@@ -1,6 +1,8 @@
 # Verification record
 
-Verified locally on 2026-10-19 with Node.js 24.19.0 and the Codex in-app browser. No deployment has been performed.
+Verified locally on 2026-10-19 with Node.js 24.19.0 and the Codex in-app browser. Published to https://alyderuby.github.io/REST/ on 2026-10-19. GitHub Actions run 39272895773 passed tests, build, and deployment using Node 24.
+
+The public site was opened successfully. Traditional Chinese/English switching, energy assessment, plan generation, and rain on/off passed smoke checks; the mobile viewport had no horizontal overflow. No browser warnings or errors were reported during this flow.
 
 ## Automated checks — passed
 
@@ -45,6 +47,6 @@ The bundled skill-creator Python validator was attempted but its environment lac
 - Browser checks were performed interactively; only the Node tests run in GitHub Actions.
 - No Safari, Firefox, physical touch device, or assistive technology audit.
 - The full two-minute timer was not waited out in the browser; expiration math was tested directly.
-- GitHub Pages publication requires your repository and Pages configuration. Its live URL and workflow execution remain unverified until you publish.
+- GitHub Pages is enabled with GitHub Actions; future pushes to main run the same test/build/deploy workflow.
 - Vercel configuration is included and follows the official static-build settings. No Vercel deployment or public URL has been created or verified.
 - Original embedded conversation UI was unavailable; this implementation follows the written requirements and later supplied room reference. Exact original method names and pixel fidelity are not claimed.

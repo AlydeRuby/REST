@@ -2,6 +2,8 @@
 
 **先歇一會兒，世界可以等等。**
 
+**[開啟 /REST 休養小室](https://alyderuby.github.io/REST/)** · 手機與電腦均可直接使用，不需要登入。分享這個網址即可；更新 `main` 後會自動測試並重新發布。
+
 一個以繁體中文為預設的個人休養網頁，以及可重複使用的 `rest` Agent Skill。原創等角小房間、柔和鼠尾草綠與簡潔控制，讓評估、休養與回顧留在同一個舒服的空間。
 
 Traditional Chinese recovery dashboard with a portable skill. Static, deterministic, dependency-free; no account, connectors, sensors, or external requests.
@@ -58,7 +60,7 @@ node scripts/server.mjs
 
 如果預設分支不是 `main`，請同步修改 `.github/workflows/pages.yml` 的分支條件。不要把整個 repository 當網站內容上傳：現有流程只發布 `dist/`。
 
-流程依照 [GitHub Pages 官方部署說明](https://docs.github.com/en/get-started/start-your-journey/deploying-your-website-automatically) 設定。此交付包尚未連接或發布到你的 GitHub 帳號。
+流程依照 [GitHub Pages 官方部署說明](https://docs.github.com/en/get-started/start-your-journey/deploying-your-website-automatically) 設定。本專案已發布到 [AlydeRuby 的 /REST 網站](https://alyderuby.github.io/REST/)。
 
 ### 其他靜態網站代管
 
