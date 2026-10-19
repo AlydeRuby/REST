@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="/REST 休養小室：用幾分鐘，回到自己的節奏。私密的能量自評、七種休養方式與恢復後回顧。">
+  <meta name="theme-color" content="#e7eee5">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; font-src 'self'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>/REST — 休養小室</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg"><link rel="stylesheet" href="./style.css"><link rel="stylesheet" href="./layout.css"><link rel="stylesheet" href="./language.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#assessment">跳至自我評估</a>
+  <div class="app-shell">
+    <header class="masthead"><a class="brand" href="./" aria-label="REST 休養小室首頁"><span class="brand-mark">/REST<span class="brand-dot">・</span></span><span class="brand-sub">休養小室</span></a><span class="private-badge"><span class="tiny-dot"></span> 只屬於你的片刻</span><div class="language-switch" role="group" aria-label="Language / 語言" data-no-translate><button type="button" data-locale="zh-Hant" aria-pressed="true" lang="zh-Hant">繁中</button><button type="button" data-locale="en" aria-pressed="false" lang="en">EN</button></div><button class="text-button" id="reset">重新開始 ↺</button></header>
+    <main>
+      <section class="intro"><div><p class="eyebrow">A LITTLE ROOM TO REST</p><h1>先歇一會兒，<br class="mobile-break">世界可以等等。</h1><p class="intro-copy">不用把自己充滿電。先找回一點舒服的感覺。</p></div><span class="intro-note">今日份的留白<br><span>ゆっくり、ひと息。</span></span></section>
+      <div class="dashboard">
+        <section class="room-card" aria-labelledby="room-title">
+          <div class="room-top"><div><span class="tiny-dot"></span><h2 id="room-title">我的休養小室</h2></div><button type="button" class="rain-toggle" id="rain-toggle" aria-pressed="false" aria-label="開啟雨天白噪音" title="開啟雨天白噪音"><span data-icon="cloud"></span><span>雨聲</span><span id="rain-state">關</span></button></div>
+          <div id="room-art" class="room-art"></div>
+          <p class="room-caption" id="room-caption">留一盞燈，也留一點時間給自己。</p>
+          <div class="room-tools"><button id="lamp-toggle" class="room-tool" aria-pressed="true"><span data-icon="lamp"></span><span>小夜燈</span></button><button id="night-toggle" class="room-tool" aria-pressed="false"><span data-icon="moon"></span><span>夜間景色</span></button><a class="room-tool" href="#methods"><span data-icon="leaf"></span><span>選擇休養</span></a></div>
+          <span class="room-corner" aria-hidden="true">REST IS PART OF THE JOURNEY</span>
+        </section>
+        <section id="assessment" class="panel assessment" aria-labelledby="assessment-title">
+          <div class="section-heading"><span class="step-label">01</span><div><p class="eyebrow">CHECK IN</p><h2 id="assessment-title">此刻的你，還好嗎？</h2></div></div>
+          <div class="energy-heading"><label for="energy">現在的能量</label><output id="energy-value" for="energy">— <small>/ 10</small></output></div>
+          <p class="field-help" id="energy-help">尚未評估，移動滑桿選擇你的感受。</p>
+          <input id="energy" class="unassessed" type="range" min="0" max="10" step="1" value="5" aria-describedby="energy-help" aria-valuetext="尚未評估">
+          <div class="range-labels"><span>0 · 需要休息</span><span>10 · 精神充足</span></div>
+          <fieldset class="needs-field"><legend>現在需要什麼？ <span>可複選</span></legend><div id="needs" class="need-list"></div></fieldset>
+          <div class="choice-summary"><span data-icon="leaf"></span><div><span class="small-label" id="choice-label">為你推薦</span><strong id="choice-name">先聽聽自己的感受</strong></div><button id="auto-mode" class="text-button" hidden>改用推薦</button></div>
+          <button id="generate" class="primary-button" disabled>安排我的休養 <span>↗</span></button><p class="microcopy" id="generate-help">選好能量，就能開始。需要選項可留空。</p>
+        </section>
+      </div>
+      <section id="methods" class="methods-section" aria-labelledby="methods-title"><div class="section-heading"><span class="step-label">02</span><div><p class="eyebrow">FIND YOUR KIND OF REST</p><h2 id="methods-title">七種休養，找到此刻的需要</h2></div><p class="section-aside">讓我們推薦，或自己選一個。</p></div><div id="method-groups" class="method-groups"></div></section>
+      <section id="plan-section" class="panel plan-section" aria-labelledby="plan-title" tabindex="-1"><div class="section-heading"><span class="step-label">03</span><div><p class="eyebrow">YOUR QUIET MOMENT</p><h2 id="plan-title">給自己的休養安排</h2></div><span id="plan-duration" class="pill">不趕時間</span></div><div id="plan-content"><div class="empty-plan"><span data-icon="cup"></span><p>從一次小小的自我照顧開始。</p><span>完成上方評估後，這裡會出現專屬的 2–3 步安排。</span></div></div></section>
+      <section id="review-section" class="panel review-section" aria-labelledby="review-title" tabindex="-1" hidden><div class="section-heading"><span class="step-label">04</span><div><p class="eyebrow">A GENTLE CHECK OUT</p><h2 id="review-title">休息之後，感覺如何？</h2></div></div><div id="review-content"></div></section>
+    </main>
+    <footer><span class="footer-brand">/REST <span>把休息，放回日常。</span></span><details><summary>隱私與使用說明</summary><p>評估只存在這個分頁的記憶體；重新整理或「重新開始」就會清除。沒有帳號、追蹤器、連接器或健康感測器，不傳送你的選項。網站代管服務仍可能保留一般連線紀錄。這是一份日常休養提案，不作診斷；時間可按感受調整。</p></details></footer>
+  </div><div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  <dialog id="reset-dialog"><h2>重新留一頁空白？</h2><p>會清除這次評估、休養安排與計時。</p><div class="dialog-actions"><button id="cancel-reset" class="secondary-button">保留這次</button><button id="confirm-reset" class="primary-button">重新開始</button></div></dialog>
+  <noscript>請啟用 JavaScript，以使用能量評估與休養安排。資料只會在你的瀏覽器內處理。</noscript>
+</body></html>

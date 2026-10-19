@@ -1,0 +1,13 @@
+{
+  "name": "rest-room",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A private, Traditional Chinese recovery room and portable REST skill",
+  "scripts": {
+    "start": "node scripts/server.mjs",
+    "build": "node scripts/build.mjs",
+    "test": "node --test --test-isolation=none tests/*.test.mjs"
+  },
+  "engines": { "node": ">=22.20.0" }
+}
