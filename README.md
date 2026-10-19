@@ -8,7 +8,7 @@ Traditional Chinese recovery dashboard with a portable skill. Static, determinis
 
 ## 先在自己的電腦看看
 
-需要 Node.js 22.20 或更新版本。在本專案資料夾執行：
+需要 Node.js 24 或更新版本。在本專案資料夾執行：
 
 ```sh
 node scripts/server.mjs
@@ -75,7 +75,7 @@ node scripts/build.mjs
 發布 repository 後，使用者可以對 Codex 說：
 
 ```text
-Use $skill-installer to install the skill at skills/rest from https://github.com/YOUR-USERNAME/rest-room.
+Use $skill-installer to install the skill at skills/rest from https://github.com/AlydeRuby/REST.
 ```
 
 或手動把 `skills/rest/` 複製到自己的 `~/.agents/skills/rest/`；專案限定安裝可放到該專案的 `.agents/skills/rest/`。如果新 skill 未出現，重新啟動 Codex。再以 `$rest` 或「啟動 /REST 個人休養建議」使用它。參考 [官方 Skills 文件](https://learn.chatgpt.com/docs/build-skills)。
