@@ -18,7 +18,7 @@ The public site was opened successfully. Traditional Chinese/English switching, 
 - Local server returns HTML/JavaScript successfully, rejects POST, and returns 404 for missing paths.
 - Skill required manifest fields, absence of unfinished placeholders, and self-contained server path.
 - English translations cover all methods, plan steps, work pacing, recovery outcomes, and dynamic values.
-- Rain samples are deterministic, non-silent, and bounded; playback starts only on request, supports stop/restart, and avoids duplicate sources.
+- The supplied MP3 starts only on request, loops, pauses/resumes without duplicate players, and stays off after a playback rejection. Tests check the bundled file, media policy, and audio MIME type.
 
 `node scripts/build.mjs` — static build completed successfully.
 
@@ -40,7 +40,7 @@ The bundled skill-creator Python validator was attempted but its environment lac
 - Viewports 320, 390, 768, and 1280 pixels: no horizontal page overflow. Recovery/reassessment also checked at 320 pixels.
 - No browser console warnings or errors in the tested flow.
 - Switching Traditional Chinese ↔ English preserves energy, selected needs, and an active timer. English planning and reassessment were exercised end to end.
-- Rain control successfully starts the browser audio context, reports on/off, and stops playback. Subjective sound quality and physical phone audio output were not independently evaluated.
+- The original synthesized rain control was browser-tested for on/off playback; it has now been replaced by the supplied MP3. Subjective sound quality and physical phone audio output were not independently evaluated.
 
 ## Remaining verification limits
 

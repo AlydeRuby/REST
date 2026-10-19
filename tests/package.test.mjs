@@ -9,6 +9,8 @@ test('app loads only bundled assets and declares no outbound connections', async
   const html = await readFile(new URL('index.html', app), 'utf8');
   assert.match(html, /lang="zh-Hant"/);
   assert.match(html, /connect-src 'none'/);
+  assert.match(html, /media-src 'self'/);
+  assert.ok(files.includes('gentle-rain.mp3'));
   for (const file of files.filter(f => /\.(js|css|html)$/.test(f))) {
     const text = await readFile(new URL(file, app), 'utf8');
     assert.doesNotMatch(text, /\b(fetch|XMLHttpRequest|WebSocket|localStorage|sessionStorage|indexedDB|getUserMedia)\b/);
@@ -24,6 +26,9 @@ test('preview serves assets, rejects writes, and handles missing files', async t
   const page = await fetch(base);
   assert.equal(page.status, 200);
   assert.match(await page.text(), /休養小室/);
+  const audio = await fetch(`${base}/gentle-rain.mp3`, { method: 'HEAD' });
+  assert.equal(audio.status, 200);
+  assert.match(audio.headers.get('content-type'), /audio\/mpeg/);
   const script = await fetch(`${base}/app.js`);
   assert.match(script.headers.get('content-type'), /javascript/);
   assert.equal((await fetch(`${base}/not-found`)).status, 404);

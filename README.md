@@ -36,7 +36,7 @@ node scripts/server.mjs
 - 可將新能量與尚未舒緩的需要帶入下一輪。
 - 房間燈光與日夜切換；選定方式會點亮對應小物。
 - 頂部提供 **繁中 / EN** 兩種語言，切換不會重設評估或計時。
-- 房間右上角的雨聲開關播放本機合成的柔和雨天白噪音，預設關閉，沒有音訊下載。
+- 房間右上角的雨聲開關循環播放提供的輕雨 MP3，預設關閉；開啟後才從本站載入音檔。
 - 手機與桌機排版、鍵盤操作、焦點提示、螢幕閱讀器標籤與減少動態偏好。
 
 ## 使用 Vercel 發布網站
@@ -107,7 +107,7 @@ Use $skill-installer to install the skill at skills/rest from https://github.com
 | `skills/rest/assets/app/style.css` | 顏色與視覺樣式 |
 | `skills/rest/assets/app/layout.css` | 響應式排版 |
 | `skills/rest/assets/app/i18n.js` | 繁中／英文文案與保留狀態的語言切換 |
-| `skills/rest/assets/app/rain.js` | 本機合成雨聲與播放生命週期 |
+| `skills/rest/assets/app/rain.js` | 輕雨錄音循環播放與暫停控制 |
 | `vercel.json` | Vercel 靜態網站部署設定 |
 | `skills/rest/scripts/serve.mjs` | 獨立 skill 的本機伺服器 |
 | `scripts/` | 專案啟動與靜態輸出 |
@@ -124,4 +124,4 @@ node scripts/build.mjs
 
 測試涵蓋所有 **2,816 組**能量／需要／推薦或手動選擇組合、未評估與 0 的差異、重評結果優先序、計時邊界、靜態資產、隱私限制與伺服器回應。瀏覽器檢查詳見 `QA.md`。目前沒有持續整合中的自動瀏覽器測試，也尚未在 Safari／Firefox 或真實觸控裝置驗證。
 
-MIT License，詳見 `LICENSE`。
+程式碼採 MIT License，詳見 `LICENSE`。提供的 `gentle-rain.mp3` 不包含在程式碼的 MIT 授權中；音檔來源檔名為 `eryliaa-gentle-rain-for-relaxation-and-sleep-337279.mp3`，保留原音檔權利。

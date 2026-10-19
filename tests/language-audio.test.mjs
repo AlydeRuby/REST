@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { english, translate } from '../skills/rest/assets/app/i18n.js';
 import { needs, methods, makePlan, evaluateRecovery } from '../skills/rest/assets/app/core.js';
-import { RainSound, makeRainSamples } from '../skills/rest/assets/app/rain.js';
+import { RainSound } from '../skills/rest/assets/app/rain.js';
 const isEnglish = source => assert.doesNotMatch(translate(source, 'en'), /[\u3400-\u9fff]/, source);
 test('English covers all methods, plan content, pacing, and recovery outcomes', () => {
   for (const source of Object.keys(english)) { assert.equal(translate(source), source); isEnglish(source); }
@@ -32,26 +32,26 @@ test('dynamic English copy preserves numbers, selected needs, and method names',
   isEnglish('不必一定變好，只要誠實地感受現在。恢復前的能量：6 / 10。');
   assert.equal(translate('— / 10', 'en'), '— / 10');
 });
-test('light drizzle is deterministic, bounded, and quieter than the original white noise', () => {
-  const samples = makeRainSamples(48000);
-  assert.deepEqual(samples, makeRainSamples(48000));
-  assert.notDeepEqual(samples, makeRainSamples(48000, 8378));
-  assert.ok(samples.every(n => Number.isFinite(n) && Math.abs(n) <= 1));
-  assert.ok(Math.abs(samples.reduce((s, x) => s + x, 0) / samples.length) < 0.02);
-  const power = samples.reduce((s, x) => s + x * x, 0) / samples.length;
-  assert.ok(power > 0.001, 'Drizzle should remain audible');
-  assert.ok(power < 0.05, 'Drizzle should be much gentler than full white noise (power ~0.33)');
+test('recording loads only on request, loops, and reuses playback after pause', async () => {
+  let created = 0, starts = 0, pauses = 0;
+  const audio = { async play() { starts++; }, pause() { pauses++; } };
+  const rain = new RainSound(() => { created++; return audio; });
+  assert.equal(created, 0);
+  await rain.start(); await rain.start();
+  assert.equal(audio.loop, true);
+  assert.equal(audio.preload, 'none');
+  assert.match(audio.src, /\/gentle-rain\.mp3$/);
+  assert.equal(starts, 1); assert.equal(rain.playing, true);
+  rain.stop(); assert.equal(rain.playing, false);
+  await rain.start(); assert.equal(created, 1); assert.equal(starts, 2);
+  rain.stop(); assert.equal(pauses, 2);
 });
-test('rain stays silent until requested; repeated starts and stop/restart have correct lifecycle', async () => {
-  let contexts = 0; let starts = 0; let stops = 0;
-  const param = () => ({ value: 0, setValueAtTime(v) { this.value = v; }, linearRampToValueAtTime(v) { this.value = v; }, cancelScheduledValues() {} });
-  const node = () => ({ connect(next) { return next; }, disconnect() {} });
-  const rain = new RainSound(() => {
-    contexts++;
-    return { state: 'suspended', currentTime: 10, sampleRate: 100, destination: node(), async resume() { this.state = 'running'; }, createBuffer(ch, length) { return { length, copyToChannel() {} }; }, createBufferSource() { return { ...node(), start() { starts++; }, stop(time) { assert.ok(time > 10); stops++; } }; }, createBiquadFilter() { return { ...node(), frequency: param(), Q: param() }; }, createGain() { return { ...node(), gain: param() }; } };
-  });
-  assert.equal(contexts, 0); assert.equal(rain.playing, false);
-  await rain.start(); await rain.start(); assert.equal(starts, 1); assert.equal(rain.playing, true);
-  rain.stop(); rain.stop(); assert.equal(stops, 1); assert.equal(rain.playing, false);
-  await rain.start(); assert.equal(starts, 2); assert.equal(contexts, 1); rain.stop();
+test('failed audio playback stays off and can be retried', async () => {
+  let blocked = true;
+  const audio = { async play() { if (blocked) throw new Error('blocked'); }, pause() {} };
+  const rain = new RainSound(() => audio);
+  await assert.rejects(rain.start(), /blocked/);
+  assert.equal(rain.playing, false);
+  blocked = false; await rain.start(); assert.equal(rain.playing, true);
+  rain.stop();
 });
